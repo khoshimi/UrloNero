@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const fs = require('fs');
 const multer = require('multer');
+const crypto = require('crypto');
 const { sequelize, User, Application, Review } = require('./db');
 
 const app = express();
@@ -28,6 +29,14 @@ const avatarStorage = multer.diskStorage({
 
 const uploadAvatar = multer({ storage: avatarStorage });
 
+// простое хеширование пароля (для учебного проекта)
+function hashPassword(password) {
+  return crypto
+    .createHash('sha256')
+    .update('urlo-nero-salt-' + String(password))
+    .digest('hex');
+}
+
 // ======= API: пользователи =======
 app.post('/api/register', async (req, res) => {
   try {
@@ -41,7 +50,8 @@ app.post('/api/register', async (req, res) => {
       return res.status(400).json({ error: 'Пользователь с таким e-mail уже существует' });
     }
 
-    const user = await User.create({ name, email, phone, password });
+    const passwordHash = hashPassword(password);
+    const user = await User.create({ name, email, phone, password: passwordHash });
     const { password: _, ...safeUser } = user.toJSON();
     res.json(safeUser);
   } catch (e) {
@@ -57,7 +67,8 @@ app.post('/api/login', async (req, res) => {
       return res.status(400).json({ error: 'Укажите e-mail и пароль' });
     }
 
-    const user = await User.findOne({ where: { email, password } });
+    const passwordHash = hashPassword(password);
+    const user = await User.findOne({ where: { email, password: passwordHash } });
     if (!user) {
       return res.status(401).json({ error: 'Неверный e-mail или пароль' });
     }

@@ -32,7 +32,11 @@ h1{
   font-size: 48px;
   margin: 0;
   color: #791300;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
+
 
 .nav{
   margin-top: 10px;
@@ -43,17 +47,40 @@ h1{
   font-family: 'Aqum2Classic', sans-serif;
   font-size: 20px;
 }
-.nav a{
+
+.ssil{
   color: #F4F4F4;
   text-decoration: none;
 }
-.nav a:hover{ color: #791300; transition: .2s; }
+.ssil :hover{
+  color: #791300; transition: 0.2s;
+}
 .Info {
-    word-spacing: 100px;
     color: white;
     font-family: 'Aqum2Classic', sans-serif;
-    font-size: 36px;
+    font-size: 30px;
+    display: flex;
+    justify-content: space-between;
+    margin-left: 164px;
+    margin-right: 164px;
 }
+hr{
+  background-color: #791300;
+  border: 0;
+  height: 2px;
+  text-align: center;
+  margin-left: 164px;
+  margin-right: 164px;
+}
+.cont6 {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-left: 164px;
+      margin-right: 164px;
+      font-size: 16px;
+      font-family: 'Aqum2Classic';
+  }
 .page{
   max-width: 900px;
   margin: 0 auto;
@@ -177,7 +204,7 @@ h1{
 }
 
 .profile-layout{
-  background:#241717;
+  background:#1E1F23;
   border-radius:18px;
   border:2px solid #1E1F23;
   padding:24px 28px;
@@ -240,7 +267,7 @@ h1{
 }
 .profile-requests-box{
   border-radius:24px;
-  border:3px solid #A62821;
+  border:3px solid #791300;
   padding:18px 18px 16px;
   min-height:170px;
 }
