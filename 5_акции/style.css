@@ -1,0 +1,327 @@
+@font-face {
+    font-family: 'Aqum2Classic';
+    src: url('Aqum 2 Classic.otf') format('opentype');
+}
+
+@font-face {
+    font-family: 'CakraNormal';
+    src: url('Cakra-Normal.otf') format('opentype');
+}
+
+@font-face {
+    font-family: 'Futurespore';
+    src: url('ofont.ru_Futurespore.ttf') format('truetype');
+}
+body {
+    background-color: #1E1F23;
+    width: 1512px;
+    height: 544px;
+    padding-top: 140px;
+}
+
+* {
+    margin: 0 auto;
+    padding: 0 auto;
+}
+
+
+header {
+    font-size: 50px;
+    color: #791300;
+    text-align: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    background-color: #1E1F23;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+h1 {
+    font-family: 'Futurespore', sans-serif;
+    font-size: 64px;
+}
+.Info {
+    word-spacing: 100px;
+    color: white;
+    margin-top: 15px;
+    font-family: 'Aqum2Classic', sans-serif;
+    font-size: 36px;
+}
+#search {
+    width: 200px;
+    height: 40px;
+    border-radius: 10px;
+}
+
+.fon {
+    max-width: 100%;
+    min-height: 544px;
+    padding-top: 160px;
+    background: url(fon.svg) no-repeat center center fixed;
+    background-size: cover;
+    margin-bottom: 40px;
+}
+
+.cont1 {
+    background-color: rgba(0, 0, 0, 0.74);
+    width: 498px;
+    height: 250px;
+    margin-top: 40px;
+    border-top-right-radius: 60px;
+    border-top-left-radius: 60px;
+    font-size: 50px;
+    color: #791300;
+    text-align: center;
+    padding: 15px;
+    transition: opacity 0.35s ease, filter 0.35s ease, transform 0.35s ease;
+}
+
+.fon .cont1 .rolls {
+    font-family: 'Futurespore', sans-serif;
+    font-size: 96px;
+}
+
+.cont2 {
+    background-color: rgba(0, 0, 0, 0.59);
+    width: 431px;
+    height: 154px;
+    margin-top: 21px;
+    border-top-left-radius: 50px;
+    border-top-right-radius: 50px;
+    padding-top: 10px;
+}
+
+.music {
+    font-size: 29px;
+    color: rgba(149, 149, 149, 1);
+    font-family: 'CakraNormal', sans-serif;
+    padding-left: 19px;
+    padding-right: 19px;
+    padding-top: 50px;
+}
+.cont3 {
+    display: flex;
+    width: 1177px;
+    margin-bottom: 61px;
+}
+.techn3 {
+    background-color: #746B4C;
+    height: 130px;
+    padding-top: 150px;
+    padding-bottom: 150px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-bottom-right-radius: 30px;
+    border-top-right-radius: 30px;
+    font-family: 'CakraNormal', sans-serif;
+    font-size: 36px;
+}
+.techn4 {
+    background-color: #F9C974;
+    height: 130px;
+    padding-top: 150px;
+    padding-bottom: 150px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-bottom-left-radius: 30px;
+    border-top-left-radius: 30px;
+    font-family: 'CakraNormal', sans-serif;
+    font-size: 36px;
+}
+.techn5 {
+    background-color: #F1DFC2;
+    height: 130px;
+    padding-top: 149px;
+    padding-bottom: 151px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-bottom-right-radius: 30px;
+    border-top-right-radius: 30px;
+    font-family: 'CakraNormal', sans-serif;
+    font-size: 36px;
+}
+.techn6 {
+    background-color: #9E8365;
+    height: 130px;
+    padding-top: 150px;
+    padding-bottom: 150px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-bottom-left-radius: 30px;
+    border-top-left-radius: 30px;
+    font-family: 'CakraNormal', sans-serif;
+    font-size: 36px;
+}
+hr {
+    color: rgba(217, 217, 217, 1);
+    margin-bottom: 30px;
+}
+
+.cont6 {
+    display: flex;
+    font-size: 30px;
+    color: rgba(81, 83, 93, 1);
+    align-items: center;
+    margin-left: 130px;
+    font-family: 'Aqum2Classic', sans-serif;
+}
+.container {
+    display: inline-block;
+    vertical-align: middle; /* Выравнивание по центру по вертикали */
+}
+.image, .text {
+    display: inline-block;
+    vertical-align: middle; /* Выравнивание по центру по вертикали */
+    color: #791300; 
+    font-family: 'Futurespore', sans-serif; 
+    font-size: 64px;  
+}
+.ssil{
+    color: #F4F4F4;
+    text-decoration: none;
+}    
+
+/* Появление блоков с размытием при скролле (Акции) */
+.reveal {
+    opacity: 0;
+    filter: blur(10px);
+    transform: translateY(28px);
+    transition: opacity 0.7s ease, filter 0.7s ease, transform 0.7s ease;
+    will-change: opacity, filter, transform;
+}
+
+.reveal.is-visible {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0);
+}
+
+@media (max-width: 767px) {
+    body {
+        background-color: #1E1F23;
+        padding-top: 110px;
+        width: 100%;
+        height: auto;
+    }
+
+    header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 20;
+        font-size: 28px;
+        background-color: #1E1F23;
+        padding: 8px 12px 4px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    h1 {
+        font-size: 32px;
+    }
+
+    .burger {
+        position: absolute;
+        top: 10px;
+        right: 16px;
+        width: 28px;
+        height: 22px;
+        padding: 0;
+        border: none;
+        background: none;
+        display: flex;
+        flex-direction: column;
+        justify-content: space между;
+        cursor: pointer;
+    }
+
+    .burger span {
+        display: block;
+        height: 3px;
+        background-color: #F4F4F4;
+        border-radius: 2px;
+        transition: transform 0.25s ease, opacity 0.25s ease;
+    }
+
+    .Info {
+        display: none;
+        flex-direction: column;
+        gap: 10px;
+        width: 100%;
+        margin-top: 40px;
+        padding: 12px 16px 8px;
+        font-size: 16px;
+        word-spacing: normal;
+        background-color: #1E1F23;
+        box-shadow: 0 8px 16px rgba(0,0,0,0.5);
+    }
+
+    header.nav-open .Info {
+        display: flex;
+    }
+
+    .fon {
+        padding: 120px 16px 80px;
+        background-attachment: scroll;
+        height: auto;
+    }
+
+    .cont1 {
+        width: 100%;
+        max-width: 320px;
+        height: auto;
+        font-size: 32px;
+        margin-top: 40px;
+    }
+
+    .fon .cont1 .rolls {
+        font-size: 40px;
+    }
+
+    .cont2 {
+        width: 100%;
+        max-width: 280px;
+        height: auto;
+    }
+
+    .music {
+        font-size: 16px;
+        padding: 12px;
+    }
+
+    .cont3 {
+        flex-direction: column;
+        width: 100%;
+        padding: 0 16px;
+        gap: 16px;
+    }
+
+    .cont3 img {
+        width: 100%;
+        height: auto;
+        border-radius: 20px;
+    }
+
+    .techn3,
+    .techn4,
+    .techn5,
+    .techn6 {
+        height: auto;
+        padding: 20px;
+        font-size: 18px;
+        border-radius: 20px;
+    }
+
+    .cont6 {
+        flex-direction: column;
+        margin-left: 0;
+        padding: 0 16px 24px;
+        text-align: center;
+        font-size: 16px;
+    }
+}

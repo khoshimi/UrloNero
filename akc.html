@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="5_акции\style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <header> <!--Шапка-->
+        <div class="container">
+            <h1>
+                <p class="text">Urlo</p><a href="practica5.html"><img  src="5_акции\logo.svg" alt="logo" class="image"></a><p class="text">Nero</p>
+            </h1>
+        </div>
+        <button class="burger" type="button" aria-label="Открыть меню">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <nav class="Info main-nav">
+            <a href="стр_2.html" class="ssil">Info</a>
+            <a href="cont.html" class="ssil">Contacts</a>
+            <a href="gal.html" class="ssil">Gallery</a>
+            <a href="ar.html" class="ssil">Arenda</a>
+            <a href="profile.html" class="ssil">Profil</a>
+        </nav>
+    </header>
+    <div class="fon">
+        <div class="cont1">
+            <p class="rolls">
+                
+                Акции
+                
+            </p>
+            <div class="cont2">
+                <p class="music">
+                    СКИДКИ тут
+                </p>
+            </div>
+        </div>      
+    </div>
+    <div class="cont3 reveal"> 
+        <img src="5_акции\1.svg" alt="Gitara"> 
+            <div class="techn3">
+                <p>
+                    лучшее время для записи подкастов!!!
+в среду и четверг скидка 50% на запись подкастов
+                </p>
+            </div>
+    </div>
+    <div class="cont3 reveal">
+            <div class="techn4">
+                <p>
+                    Ждите каждые выходные ноября, потому что именно в ноябре будут бесплатные мастер-классы по вокалу
+                </p>
+            </div>
+        <img src="5_акции\2.png" alt="Gitara">
+    </div>
+    <div class="cont3 reveal">
+         <img src="5_акции\3.svg" alt="Gitara">
+        <div class="techn5">
+            <p>
+                16 и 17 ноября бесплатный мастер-класс по игре на гитаре, который проведет для вас наш марк
+            </p>
+        </div>
+    
+</div>
+<div class="cont3 reveal">
+         
+    <div class="techn6">
+        <p>
+            20 ноября аня проведет бесплатный мастер-класс по игре на барабанах
+        </p>
+    </div>
+<img src="5_акции\4.svg" alt="Gitara">
+</div>
+<hr>
+
+<footer>
+    <p class="cont6">
+        Urlo Nero Studio © 2024. Все права защищены | Политика Конфиденциальности <img class="xl" src="5_акции\logo.svg" alt="logo">     
+    </p>               
+</footer>
+
+<script>
+    // Бургер-меню для мобильной шапки (Акции)
+    (function () {
+        const header = document.querySelector('header');
+        const burger = document.querySelector('.burger');
+        const nav = document.querySelector('.main-nav');
+        if (!header || !burger || !nav) return;
+
+        burger.addEventListener('click', () => {
+            header.classList.toggle('nav-open');
+        });
+    })();
+
+    // Размываем и прячем блок .cont1 при скролле (Акции), шапка зафиксирована
+    (function () {
+        const cont1 = document.querySelector('.cont1');
+        if (!cont1) return;
+
+        function onScroll() {
+            const scrollY = window.scrollY || window.pageYOffset;
+            const start = 0;
+            const end = 350;
+            const t = Math.min(Math.max((scrollY - start) / (end - start), 0), 1);
+
+            const opacity = 1 - t;
+            const blur = t * 6;
+            const translateY = t * -20;
+
+            cont1.style.opacity = opacity.toString();
+            cont1.style.filter = `blur(${blur}px)`;
+            cont1.style.transform = `translateY(${translateY}px)`;
+        }
+
+        window.addEventListener('scroll', onScroll);
+        window.addEventListener('load', onScroll);
+    })();
+
+    // Появление блоков с размытием (Акции)
+    (function () {
+        const items = document.querySelectorAll('.reveal');
+        if (!items.length) return;
+
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (!entry.isIntersecting) return;
+                    entry.target.classList.add('is-visible');
+                    observer.unobserve(entry.target);
+                });
+            },
+            { threshold: 0.15 }
+        );
+
+        items.forEach((el) => observer.observe(el));
+    })();
+</script>
+</body>
+</html>

@@ -1,0 +1,442 @@
+
+@font-face {
+    font-family: 'Aqum2Classic';
+    src: url('Aqum 2 Classic.otf') format('opentype');
+}
+
+@font-face {
+    font-family: 'CakraNormal';
+    src: url('Cakra-Normal.otf') format('opentype');
+}
+
+@font-face {
+    font-family: 'Futurespore';
+    src: url('ofont.ru_Futurespore.ttf') format('truetype');
+}
+@media (min-width: 480px) {
+    .conteiner{
+        width: 1150px;
+    }
+    body {
+        background-color: #1E1F23;
+        padding-top: 140px;
+    }
+    
+    * {
+        margin: 0 auto;
+        padding: 0 auto;
+    }
+    
+    
+    header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 10;
+        font-size: 50px;
+        color: #791300;
+        text-align: center;
+        background-color: #1E1F23;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+    
+    h1 {
+        font-family: 'Futurespore', sans-serif;
+        font-size: 64px;
+    }
+  
+    img {
+        vertical-align: bottom;
+    }
+    
+    .Info {
+        word-spacing: 100px;
+        color: white;
+        margin-top: 15px;
+        font-family: 'Aqum2Classic', sans-serif;
+        font-size: 36px;
+    }
+    
+    #search {
+        width: 200px;
+        height: 40px;
+        border-radius: 10px;
+    }
+    
+    .fon {
+        max-width: 100%;
+        padding-top: 160px;
+        padding-bottom: 160px;
+        background-image: url(123.png);
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: cover;
+        background-attachment: fixed; /* классический параллакс */
+        text-align: center;
+    }
+    
+    .cont1 {
+        background-color: rgba(0, 0, 0, 0.74);
+        width: 450px;
+        height: 370px;
+        border-top-right-radius: 60px;
+        border-top-left-radius: 60px;
+        font-size: 50px;
+        color: #791300;
+        text-align: center;
+        padding: 15px;
+        transition: opacity 0.35s ease, filter 0.35s ease, transform 0.35s ease;
+    }
+    
+    .fon .cont1 .rolls {
+        font-family: 'Futurespore', sans-serif;
+        font-size: 96px;
+    }
+    
+    .cont2 {
+        background-color: rgba(0, 0, 0, 0.59);
+        width: 400px;
+        height: 198px;
+        margin-top: 20px;
+        border-top-left-radius: 50px;
+        border-top-right-radius: 50px;
+        padding-top: 10px;
+    }
+    
+    .music {
+        font-size: 29px;
+        color: rgba(149, 149, 149, 1);
+        font-family: 'CakraNormal', sans-serif;
+        padding-left: 19px;
+        padding-right: 19px;
+        padding-top: 10px;
+    }
+    
+    .news {
+        font-size: 128px;
+        color: #791300;
+        margin-left: 162px;
+        margin-bottom: 50px;
+        font-family: 'Aqum2Classic', sans-serif;
+    }
+    
+    .cont3 {
+        display: flex;
+        width: 1177px;
+        margin-bottom: 61px;
+    }
+    
+    .techn {
+        font-size: 40px;
+        display: flex;
+        flex-direction: column;
+        background-color: rgba(101, 45, 25, 1);
+        width: auto;
+        height: 134px;
+        border-top-right-radius: 30px;
+    }
+    
+    .techn2 {
+        color: rgba(221, 190, 178, 1);
+        align-items: center;
+        font-family: 'Aqum2Classic', sans-serif;
+        font-size: 48px;
+        padding-left: 20px;
+        height: 380px;
+    }
+    
+    .techn3 {
+        background-color: rgba(217, 217, 217, 1);
+        height: 380px;
+        padding-top: 52px;
+        padding-bottom: 52px;
+        padding-left: 20px;
+        padding-right: 20px;
+        border-bottom-right-radius: 30px;
+        font-family: 'CakraNormal', sans-serif;
+    }
+    
+    .cont4 {
+        display: flex;
+        width: 1177px;
+        text-align: center;
+        margin-bottom: 61px;
+    }
+    
+    .techn4 {
+        font-size: 40px;
+        display: flex;
+        flex-direction: column;
+        background-color: rgba(14, 13, 11, 1);
+        width: auto;
+        height: 70px;
+        border-top-left-radius: 30px;
+        font-family: 'Aqum2Classic', sans-serif;
+    }
+    
+    .techn5 {
+        padding-left: 20px;
+        color: rgba(253, 209, 103, 1);
+        align-items: center;
+        font-family: 'Aqum2Classic', sans-serif;
+        font-size: 48px;
+        height: 380px;
+    }
+    
+    .techn6 {
+        background-color: rgba(217, 217, 217, 1);
+        height: 380px;
+        padding-top:69px;
+        padding-bottom:69px;
+        padding-left: 20px;
+        padding-right: 20px;
+        border-bottom-left-radius: 30px;
+        font-family: 'CakraNormal', sans-serif;
+        font-size: 36px;
+    }
+    
+    .cont5 {
+        display: flex;
+        width: 1177px;
+        margin-bottom: 61px;
+    }
+
+    /* Появление блоков с размытием при скролле */
+    .reveal {
+        opacity: 0;
+        filter: blur(10px);
+        transform: translateY(28px);
+        transition: opacity 0.7s ease, filter 0.7s ease, transform 0.7s ease;
+        will-change: opacity, filter, transform;
+    }
+
+    .reveal.is-visible {
+        opacity: 1;
+        filter: blur(0);
+        transform: translateY(0);
+    }
+    
+    .techn7 {
+        font-size: 40px;
+        display: flex;
+        flex-direction: column;
+        background-color: rgba(14, 13, 11, 1);
+        width: auto;
+        height: 70px;
+        border-top-right-radius: 30px;
+        font-family: 'CakraNormal', sans-serif;
+    }
+    
+    .techn8 {
+        padding-left: 20px;
+        color: #F4F4F4;
+        align-items: center;
+        font-family: 'Aqum2Classic', sans-serif;
+    }
+    
+    .techn9 {
+        background-color: rgba(217, 217, 217, 1);
+        height: 1887px;
+        padding-top: 114px;
+        padding-bottom: 115px;
+        padding-left: 20px;
+        padding-right: 20px;
+        border-bottom-right-radius: 30px;
+        margin-bottom: 40px;
+        font-family: 'CakraNormal', sans-serif;
+    }
+    
+    .ricroll {
+        font-size: 24px;
+        color: #791300;
+        font-family: 'CakraNormal', sans-serif;
+        
+    }
+    
+    hr {
+        color: rgba(217, 217, 217, 1);
+        margin-bottom: 30px;
+    }
+    
+    .cont6 {
+        display: flex;
+        font-size: 30px;
+        color: rgba(81, 83, 93, 1);
+        align-items: center;
+        margin-left: 130px;
+        font-family: 'Aqum2Classic', sans-serif;
+    }
+    
+    .xl {
+        margin-left: 30px;
+        margin-bottom: 20px;
+    }
+    .container {
+        display: inline-block;
+        vertical-align: middle; /* Выравнивание по центру по вертикали */
+    }
+    .image, .text {
+        display: inline-block;
+        vertical-align: middle; /* Выравнивание по центру по вертикали */
+        color: #791300; 
+        font-family: 'Futurespore', sans-serif; 
+        font-size: 64px;  
+    }
+    .ssil{
+        color: #F4F4F4;
+        text-decoration: none;
+    }
+    .ssil:hover{
+        color: #791300;
+        text-decoration: none;
+        transition: 0.5s;
+    }
+
+    /* (параллакс слоями удалён по просьбе) */
+}
+
+@media (max-width: 767px) {
+    body {
+        background-color: #1E1F23;
+        padding-top: 110px;
+    }
+
+    header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 20;
+        font-size: 28px;
+        background-color: #1E1F23;
+        padding: 8px 12px 4px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    h1 {
+        font-size: 32px;
+    }
+
+    .burger {
+        position: absolute;
+        top: 10px;
+        right: 16px;
+        width: 28px;
+        height: 22px;
+        padding: 0;
+        border: none;
+        background: none;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        cursor: pointer;
+    }
+
+    .burger span {
+        display: block;
+        height: 3px;
+        background-color: #F4F4F4;
+        border-radius: 2px;
+        transition: transform 0.25s ease, opacity 0.25s ease;
+    }
+
+    .Info {
+        display: none;
+        flex-direction: column;
+        gap: 10px;
+        width: 100%;
+        margin-top: 40px;
+        padding: 12px 16px 8px;
+        font-size: 16px;
+        word-spacing: normal;
+        background-color: #1E1F23;
+        box-shadow: 0 8px 16px rgba(0,0,0,0.5);
+    }
+
+    header.nav-open .Info {
+        display: flex;
+    }
+
+    .fon {
+        padding: 120px 16px 80px;
+        background-attachment: scroll;
+    }
+
+    .cont1 {
+        width: 100%;
+        max-width: 320px;
+        height: auto;
+        font-size: 32px;
+    }
+
+    .fon .cont1 .rolls {
+        font-size: 52px;
+    }
+
+    .cont2 {
+        width: 100%;
+        max-width: 280px;
+        height: auto;
+    }
+
+    .music {
+        font-size: 16px;
+        padding: 12px;
+    }
+
+    .news {
+        margin: 24px auto 24px;
+        text-align: center;
+        font-size: 40px;
+    }
+
+    .cont3,
+    .cont4,
+    .cont5 {
+        flex-direction: column;
+        width: 100%;
+        padding: 0 16px;
+        gap: 16px;
+    }
+
+    .cont3 img,
+    .cont4 img,
+    .cont5 img {
+        width: 100%;
+        height: auto;
+        border-radius: 20px;
+    }
+
+    .techn,
+    .techn4,
+    .techn7 {
+        width: 100%;
+        height: auto;
+        border-radius: 20px 20px 0 0;
+    }
+
+    .techn3,
+    .techn6,
+    .techn9 {
+        height: auto;
+        padding: 20px;
+        font-size: 16px;
+        border-radius: 0 0 20px 20px;
+    }
+
+    .cont6 {
+        flex-direction: column;
+        margin-left: 0;
+        padding: 0 16px 24px;
+        text-align: center;
+        font-size: 16px;
+    }
+
+    .xl {
+        margin: 12px 0 0;
+    }
+}

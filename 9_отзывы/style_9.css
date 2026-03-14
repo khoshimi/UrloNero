@@ -1,0 +1,306 @@
+@font-face {
+    font-family: 'Aqum2Classic';
+    src: url('Aqum 2 Classic.otf') format('opentype');
+}
+
+@font-face {
+    font-family: 'CakraNormal';
+    src: url('Cakra-Normal.otf') format('opentype');
+}
+
+@font-face {
+    font-family: 'Futurespore';
+    src: url('ofont.ru_Futurespore.ttf') format('truetype');
+}
+body {
+    background-color: #1E1F23;
+    width: 1512px;
+    height: 544px;
+}
+
+* {
+    margin: 0 auto;
+    padding: 0 auto;
+}
+
+
+header {
+    font-size: 50px;
+    color: #791300;
+    text-align: center;
+}
+
+h1 {
+    font-family: 'Futurespore', sans-serif;
+    font-size: 64px;
+}
+.Info {
+    word-spacing: 100px;
+    color: white;
+    margin-top: 15px;
+    font-family: 'Aqum2Classic', sans-serif;
+    font-size: 36px;
+}
+#search {
+    width: 200px;
+    height: 40px;
+    border-radius: 10px;
+}
+
+.fon {
+    max-width: 100%;
+    height: 544px;
+    padding-top: 160px;
+    background: url(fon.svg) no-repeat;
+    margin-bottom: -100px;
+}
+
+.cont1 {
+    background-color: rgba(0, 0, 0, 0.74);
+    width: 498px;
+    height: 250px;
+    margin-top: 110px;
+    border-top-right-radius: 60px;
+    border-top-left-radius: 60px;
+    font-size: 50px;
+    color: #791300;
+    text-align: center;
+    padding: 15px;
+}
+
+.fon .cont1 .rolls {
+    font-family: 'Futurespore', sans-serif;
+    font-size: 96px;
+}
+
+.cont2 {
+    background-color: rgba(0, 0, 0, 0.59);
+    width: 431px;
+    height: 154px;
+    margin-top: 21px;
+    border-top-left-radius: 50px;
+    border-top-right-radius: 50px;
+    padding-top: 10px;
+}
+
+.music {
+    font-size: 29px;
+    color: rgba(149, 149, 149, 1);
+    font-family: 'CakraNormal', sans-serif;
+    padding-left: 19px;
+    padding-right: 19px;
+    padding-top: 50px;
+}
+.cont3 {
+    display: flex;
+    width: 1177px;
+    margin-bottom: 61px;
+}
+.techn3 {
+    background-color: #610000;
+    height: 130px;
+    padding-top: 60px;
+    padding-bottom: 240px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-bottom-right-radius: 30px;
+    border-top-right-radius: 30px;
+    font-family: 'CakraNormal', sans-serif;
+    font-size: 36px;
+}
+.techn4 {
+    background-color: #610000;
+    height: 130px;
+    padding-top: 80px;
+    padding-bottom: 222px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-bottom-left-radius: 30px;
+    border-top-left-radius: 30px;
+    font-family: 'CakraNormal', sans-serif;
+    font-size: 36px;
+}
+.techn5 {
+    background-color: #610000;
+    height: 396px;
+    padding-top: 35px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-bottom-right-radius: 30px;
+    border-top-right-radius: 30px;
+    font-family: 'CakraNormal', sans-serif;
+    font-size: 36px;
+}
+.techn6 {
+    background-color: #610000;
+    height: 50px;
+    padding-top: 85px;
+    padding-bottom: 298px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-bottom-left-radius: 30px;
+    border-top-left-radius: 30px;
+    font-family: 'CakraNormal', sans-serif;
+    font-size: 36px;
+}
+hr {
+    color: rgba(217, 217, 217, 1);
+    margin-bottom: 30px;
+}
+
+.cont6 {
+    display: flex;
+    font-size: 30px;
+    color: rgba(81, 83, 93, 1);
+    align-items: center;
+    margin-left: 130px;
+    font-family: 'Aqum2Classic', sans-serif;
+}
+.container {
+    display: inline-block;
+    vertical-align: middle;
+}
+.image, .text {
+    display: inline-block;
+    vertical-align: middle;
+    color: #610000; 
+    font-family: 'Futurespore', sans-serif; 
+    font-size: 64px;  
+}
+.ssil{
+    color: #F4F4F4;
+    text-decoration: none;
+} 
+
+/* Форма отзыва */
+.section{
+    max-width: 1200px;
+    padding: 40px 20px 60px;
+    color: #F4F4F4;
+    font-family: 'CakraNormal', sans-serif;
+}
+.section-title{
+    font-family: 'Aqum2Classic', sans-serif;
+    font-size: 48px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+.section-subtitle{
+    font-size: 20px;
+    text-align: center;
+    margin-bottom: 30px;
+    color: #C4C4C4;
+}
+.form{
+    max-width: 700px;
+    margin: 0 auto;
+    background-color: #111216;
+    border-radius: 16px;
+    padding: 24px 20px 28px;
+    border: 2px solid #791300;
+    box-sizing: border-box;
+}
+.form-row{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 18px;
+}
+.form-label{
+    margin-bottom: 6px;
+    font-size: 18px;
+}
+.form-input{
+    font-family: 'CakraNormal', sans-serif;
+    font-size: 16px;
+    padding: 10px 12px;
+    border-radius: 10px;
+    border: 1px solid #3A3B41;
+    background-color: #1E1F23;
+    color: #F4F4F4;
+    outline: none;
+}
+.form-input:focus{
+    border-color: #791300;
+    box-shadow: 0 0 0 1px #791300;
+}
+.form-textarea{
+    min-height: 90px;
+    resize: vertical;
+}
+.btn-primary{
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 30px;
+    border-radius: 999px;
+    border: none;
+    background-color: #791300;
+    color: #F4F4F4;
+    font-family: 'Aqum2Classic', sans-serif;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color .3s ease, transform .2s ease;
+}
+.btn-primary:hover{
+    background-color: #a31b00;
+    transform: translateY(-1px);
+}
+.feedback-list{
+    max-width: 700px;
+    margin: 30px auto 0;
+    list-style: none;
+    padding: 0;
+}
+.feedback-item{
+    background-color: #111216;
+    border-radius: 14px;
+    padding: 14px 16px;
+    border: 1px solid #3A3B41;
+    margin-bottom: 10px;
+}
+.feedback-author{
+    font-weight: bold;
+    margin-bottom: 4px;
+}
+.feedback-text{
+    font-size: 14px;
+}
+
+/* Адаптив для мобильных устройств */
+@media (max-width: 768px){
+    body{
+        width: 100%;
+    }
+    .Info{
+        font-size: 20px;
+        word-spacing: 20px;
+    }
+    h1{
+        font-size: 40px;
+    }
+    .fon{
+        padding-top: 80px;
+        background-size: cover;
+    }
+    .cont3{
+        flex-direction: column;
+        text-align: center;
+        gap: 16px;
+    }
+    .section{
+        padding: 30px 16px 40px;
+    }
+    .section-title{
+        font-size: 32px;
+    }
+    .section-subtitle{
+        font-size: 16px;
+    }
+    .form{
+        padding: 18px 14px 22px;
+    }
+    .cont6{
+        font-size: 18px;
+        margin-left: 16px;
+        margin-right: 16px;
+    }
+}

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Профиль</title>
+  <link rel="stylesheet" href="forms.css">
+</head>
+<body>
+  <header>
+        <div class="container">
+            <h1>
+                <p class="text">Urlo</p><a href="glav.html"><img  src="1_гл_страница\logo.svg" alt="logo" class="image"></a><p class="text">Nero</p>
+            </h1>
+        </div>
+        <button class="burger" type="button" aria-label="Открыть меню">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <nav class="Info main-nav">
+            <a href="стр_2.html" class="ssil">О нас</a>
+            <a href="cont.html" class="ssil">Контакты</a>
+            <a href="gal.html" class="ssil">Галерея</a>
+            <a href="ar.html" class="ssil">Аренда</a>
+            <a href="profile.html" class="ssil">Профиль</a>
+        </nav>
+    </header>
+
+  <main class="page">
+    <div class="profile-layout" id="profile-layout">
+      <div class="profile-left">
+        <div class="profile-avatar-wrap">
+          <img id="profile-avatar" class="profile-avatar" src="" alt="Аватар">
+          <label for="avatar-input" class="avatar-change">сменить фото</label>
+          <input id="avatar-input" type="file" accept="image/*" style="display:none">
+        </div>
+        <div class="profile-lines" id="profile-lines">
+          <!-- сюда JS вставит имя, телефон и почту -->
+        </div>
+      </div>
+      <div class="profile-right">
+        <div class="profile-requests-box">
+          <div class="profile-requests-title">МОИ ЗАЯВКИ</div>
+          <ul id="applications-list" class="profile-requests-list">
+            <li class="muted">Пока нет ни одной заявки.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div id="profile-empty" class="profile-empty">
+      <p class="muted">Вы ещё не вошли в систему.</p>
+      <p><a href="auth.html" class="muted">Перейти к регистрации / входу</a></p>
+    </div>
+  </main>
+
+  <script src="site.js"></script>
+</body>
+</html>
+
+

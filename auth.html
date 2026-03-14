@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Регистрация / Вход</title>
+  <link rel="stylesheet" href="forms.css">
+</head>
+<body>
+  <header>
+    <h1>Urlo Nero</h1>
+    <nav class="nav">
+      <a href="glav.html">Главная</a>
+      <a href="napr.html">Направления</a>
+      <a href="otz.html">Отзывы</a>
+      <a href="ar.html">Заявка</a>
+      <a href="profile.html">Профиль</a>
+    </nav>
+  </header>
+
+  <main class="page">
+    <h2 class="section-title">Регистрация и авторизация</h2>
+    <p class="section-subtitle">Войдите, чтобы заявки сохранялись в профиле</p>
+
+    <div class="card">
+      <div class="tabs">
+        <button class="tab-btn active" id="tab-register" type="button">Регистрация</button>
+        <button class="tab-btn" id="tab-login" type="button">Вход</button>
+      </div>
+
+      <form id="register-form" class="form">
+        <div class="form-row">
+          <label class="form-label" for="reg-name">Имя</label>
+          <input class="form-input" id="reg-name" name="name" type="text" placeholder="Ваше имя" required>
+        </div>
+        <div class="form-row">
+          <label class="form-label" for="reg-email">E-mail</label>
+          <input class="form-input" id="reg-email" name="email" type="email" placeholder="you@example.com" required>
+        </div>
+        <div class="form-row">
+          <label class="form-label" for="reg-phone">Телефон</label>
+          <input class="form-input" id="reg-phone" name="phone" type="tel" placeholder="+7..." required>
+        </div>
+        <div class="form-row">
+          <label class="form-label" for="reg-password">Пароль</label>
+          <input class="form-input" id="reg-password" name="password" type="password" placeholder="Придумайте пароль" required>
+        </div>
+        <button class="btn-primary" type="submit">Зарегистрироваться</button>
+      </form>
+
+      <form id="login-form" class="form" style="display:none;">
+        <div class="form-row">
+          <label class="form-label" for="login-email">E-mail</label>
+          <input class="form-input" id="login-email" name="email" type="email" placeholder="you@example.com" required>
+        </div>
+        <div class="form-row">
+          <label class="form-label" for="login-password">Пароль</label>
+          <input class="form-input" id="login-password" name="password" type="password" placeholder="Ваш пароль" required>
+        </div>
+        <button class="btn-primary" type="submit">Войти</button>
+      </form>
+
+      <button id="logout-btn" class="btn-secondary" type="button" style="display:none;">Выйти из аккаунта</button>
+    </div>
+  </main>
+
+  <script src="site.js"></script>
+</body>
+</html>
+
+

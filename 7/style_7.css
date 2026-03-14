@@ -1,0 +1,495 @@
+
+@font-face {
+    font-family: 'Aqum2Classic';
+    src: url('Aqum 2 Classic.otf') format('opentype');
+}
+
+@font-face {
+    font-family: 'CakraNormal';
+    src: url('Cakra-Normal.otf') format('opentype');
+}
+
+@font-face {
+    font-family: 'Futurespore';
+    src: url('ofont.ru_Futurespore.ttf') format('truetype');
+}
+body {
+    background-color: #1E1F23;
+    width: 1512px;
+    height: 544px;
+}
+
+@media (min-width: 480px) {
+    .conteiner{
+        width: 1150px;
+    }
+    body {
+        background-color: #1E1F23;
+    }
+    
+    * {
+        margin: 0 auto;
+        padding: 0 auto;
+    }
+    
+    
+    header {
+        font-size: 50px;
+        color: #791300;
+        text-align: center;
+    }
+    
+    h1 {
+        font-family: 'Futurespore', sans-serif;
+        font-size: 64px;
+    }
+  
+    img {
+        vertical-align: bottom;
+    }
+    
+    .Info {
+        word-spacing: 100px;
+        color: white;
+        margin-top: 15px;
+        font-family: 'Aqum2Classic', sans-serif;
+        font-size: 36px;
+    }
+    
+    #search {
+        width: 200px;
+        height: 40px;
+        border-radius: 10px;
+    }
+    
+    .fon {
+        max-width: 100%;
+        
+        padding-top: 160px;
+        background: url(fon.svg) no-repeat;
+        text-align: center;
+    }
+    
+    .cont1 {
+        background-color: rgba(0, 0, 0, 0.74);
+        width: 450px;
+        height: 370px;
+        border-top-right-radius: 60px;
+        border-top-left-radius: 60px;
+        font-size: 50px;
+        color: #791300;
+        text-align: center;
+        padding: 15px;
+    }
+    
+    .fon .cont1 .rolls {
+        font-family: 'Futurespore', sans-serif;
+        font-size: 96px;
+    }
+    
+    .cont2 {
+        background-color: rgba(0, 0, 0, 0.59);
+        width: 400px;
+        height: 198px;
+        margin-top: 20px;
+        border-top-left-radius: 50px;
+        border-top-right-radius: 50px;
+        padding-top: 10px;
+    }
+    
+    .music {
+        font-size: 29px;
+        color: rgba(149, 149, 149, 1);
+        font-family: 'CakraNormal', sans-serif;
+        padding-left: 19px;
+        padding-right: 19px;
+        padding-top: 10px;
+    }
+
+    .news {
+        font-size: 64px;
+        color: #791300;
+        margin-bottom: 50px;
+        font-family: 'Aqum2Classic', sans-serif;
+        text-align: center;
+    }
+
+* {
+    margin: 0 auto;
+    padding: 0 auto;
+}
+.slider{
+    width: 1300px;
+    max-width: 100vw;
+    height: 700px;
+    margin: auto;
+    position: relative;
+    overflow: hidden;
+}
+.slider .list{
+    position: absolute;
+    width: max-content;
+    height: 100%;
+    left: 0;
+    top: 0;
+    display: flex;
+    transition: 1s;
+}
+.slider .list img{
+    width: 1300px;
+    max-width: 100vw;
+    height: 100%;
+    object-fit: cover;
+}
+.slider .buttons{
+    position: absolute;
+    top: 45%;
+    left: 5%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+.slider .buttons button{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #fff5;
+    color: #fff;
+    border: none;
+    font-family: monospace;
+    font-weight: bold;
+}
+.slider .dots{
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+    color: #fff;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+}
+.slider .dots li{
+    list-style: none;
+    width: 10px;
+    height: 10px;
+    background-color: #000;
+    border: 1px solid #fff;
+    margin: 10px;
+    border-radius: 20px;
+    transition: 0.5s;
+}
+.slider .dots li.active{
+    width: 30px;
+}
+.buttons #prev{
+    margin-left: -50px;
+}
+.buttons #next{
+    margin-right: 80px;
+}
+
+h3{
+    font-size: 48px;
+    font-family: 'Aqum2Classic';
+    color: #F4F4F4;
+    text-align: center;
+}
+
+.opis{
+    font-size: 32px;
+    font-family: 'CakraNormal';
+    color: #F4F4F4;
+    text-align: center;
+}
+
+.zena{
+    display: flex;
+    justify-content: space-between;
+    margin: 80px;
+}
+
+.zena1{
+    width: 585px;
+    height: 586px;
+    background-color: #1E1F23;
+    border-radius: 18px;
+    border: 3px solid #791300;
+}
+
+.zena1:hover{
+    width: 585px;
+    height: 586px;
+    background-color: #3a0900;
+    border-radius: 18px;
+    border: 3px solid #791300;
+    transition: 0.5s;
+}
+.p11{
+    font-size: 48px;
+    font-family: 'CakraNormal';
+    color: #F4F4F4;
+    text-align: center;
+    margin-top: 50px;
+}
+.p12{
+    font-size: 48px;
+    font-family: 'CakraNormal';
+    color: #791300;
+    text-align: center;
+    margin-top: 81px;
+    margin-bottom: 36px;
+}
+.p13{
+    font-size: 32px;
+    font-family: 'CakraNormal';
+    color: #F4F4F4;
+    text-align: center;
+}
+
+.p21{
+    font-size: 48px;
+    font-family: 'CakraNormal';
+    color: #F4F4F4;
+    text-align: center;
+    margin-top: 50px;
+}
+.p22{
+    font-size: 48px;
+    font-family: 'CakraNormal';
+    color: #791300;
+    text-align: center;
+    margin-top: 14px;
+    margin-bottom: 36px;
+}
+.p23{
+    font-size: 32px;
+    font-family: 'CakraNormal';
+    color: #F4F4F4;
+    text-align: center;
+}
+
+.cont6 {
+        display: flex;
+        font-size: 30px;
+        color: rgba(81, 83, 93, 1);
+        align-items: center;
+        margin-left: 130px;
+        font-family: 'Aqum2Classic', sans-serif;
+    }
+    
+    .xl {
+        margin-left: 30px;
+        margin-bottom: 20px;
+    }
+    .container {
+        display: inline-block;
+        vertical-align: middle; /* Выравнивание по центру по вертикали */
+    }
+    .image, .text {
+        display: inline-block;
+        vertical-align: middle; /* Выравнивание по центру по вертикали */
+        color: #791300; 
+        font-family: 'Futurespore', sans-serif; 
+        font-size: 64px;  
+    }
+    .ssil{
+        color: #F4F4F4;
+        text-decoration: none;
+    }
+    .ssil:hover{
+        color: #791300;
+        text-decoration: none;
+        transition: 0.5s;
+    }
+
+    /* Формы регистрации, заявки и профиль */
+    .section{
+        max-width: 1200px;
+        padding: 40px 20px 60px;
+        color: #F4F4F4;
+        font-family: 'CakraNormal', sans-serif;
+    }
+    .section-title{
+        font-family: 'Aqum2Classic', sans-serif;
+        font-size: 48px;
+        margin-bottom: 10px;
+        text-align: center;
+    }
+    .section-subtitle{
+        font-size: 20px;
+        text-align: center;
+        margin-bottom: 30px;
+        color: #C4C4C4;
+    }
+    .section-note{
+        font-size: 16px;
+        color: #C4C4C4;
+        margin-top: 10px;
+        text-align: center;
+    }
+    .form{
+        max-width: 700px;
+        margin: 0 auto;
+        background-color: #111216;
+        border-radius: 16px;
+        padding: 24px 20px 28px;
+        border: 2px solid #791300;
+        box-sizing: border-box;
+    }
+    .form-row{
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 18px;
+    }
+    .form-label{
+        margin-bottom: 6px;
+        font-size: 18px;
+    }
+    .form-input{
+        font-family: 'CakraNormal', sans-serif;
+        font-size: 16px;
+        padding: 10px 12px;
+        border-radius: 10px;
+        border: 1px solid #3A3B41;
+        background-color: #1E1F23;
+        color: #F4F4F4;
+        outline: none;
+    }
+    .form-input:focus{
+        border-color: #791300;
+        box-shadow: 0 0 0 1px #791300;
+    }
+    .form-textarea{
+        min-height: 90px;
+        resize: vertical;
+    }
+    .btn-primary{
+        display: inline-block;
+        margin-top: 10px;
+        padding: 10px 30px;
+        border-radius: 999px;
+        border: none;
+        background-color: #791300;
+        color: #F4F4F4;
+        font-family: 'Aqum2Classic', sans-serif;
+        font-size: 18px;
+        cursor: pointer;
+        transition: background-color .3s ease, transform .2s ease;
+    }
+    .btn-primary:hover{
+        background-color: #a31b00;
+        transform: translateY(-1px);
+    }
+    .profile-info{
+        max-width: 700px;
+        margin: 0 auto 20px;
+        background-color: #111216;
+        border-radius: 16px;
+        padding: 20px;
+        border: 1px solid #3A3B41;
+        box-sizing: border-box;
+    }
+    .applications{
+        max-width: 700px;
+        margin: 0 auto;
+    }
+    .applications-title{
+        font-family: 'Aqum2Classic', sans-serif;
+        font-size: 32px;
+        margin-bottom: 12px;
+        text-align: left;
+    }
+    .applications-list{
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+    .applications-item{
+        background-color: #111216;
+        border-radius: 14px;
+        padding: 14px 16px;
+        border: 1px solid #3A3B41;
+        margin-bottom: 10px;
+    }
+    .applications-item-top{
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        margin-bottom: 6px;
+        font-size: 16px;
+    }
+    .app-direction{
+        font-weight: bold;
+        color: #F4F4F4;
+    }
+    .app-date{
+        color: #C4C4C4;
+        font-size: 14px;
+    }
+    .app-comment{
+        font-size: 14px;
+        color: #E0E0E0;
+    }
+    .applications-empty{
+        color: #C4C4C4;
+        font-size: 16px;
+    }
+
+    /* Адаптив для мобильных устройств */
+    @media (max-width: 768px){
+        body{
+            width: 100%;
+        }
+        .Info{
+            font-size: 20px;
+            word-spacing: 20px;
+        }
+        h1{
+            font-size: 40px;
+        }
+        .fon{
+            padding-top: 80px;
+            background-size: cover;
+        }
+        .slider{
+            width: 100%;
+            height: 260px;
+        }
+        .slider .list img{
+            width: 100%;
+        }
+        .zena{
+            flex-direction: column;
+            gap: 20px;
+            margin: 20px;
+        }
+        .zena1{
+            width: 100%;
+            height: auto;
+            padding-bottom: 20px;
+            box-sizing: border-box;
+        }
+        .section{
+            padding: 30px 16px 40px;
+        }
+        .section-title{
+            font-size: 32px;
+        }
+        .section-subtitle{
+            font-size: 16px;
+        }
+        .form{
+            padding: 18px 14px 22px;
+        }
+        .applications-item-top{
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        .cont6{
+            font-size: 18px;
+            margin-left: 16px;
+            margin-right: 16px;
+        }
+    }
