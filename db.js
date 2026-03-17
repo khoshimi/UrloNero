@@ -33,6 +33,11 @@ const User = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false
     },
+    isAdmin: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false
+    },
     avatar: {
       type: DataTypes.TEXT, // dataURL или ссылка
       allowNull: true
@@ -63,6 +68,11 @@ const Application = sequelize.define(
     comment: {
       type: DataTypes.TEXT,
       allowNull: true
+    },
+    status: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      defaultValue: 'pending'
     }
   },
   {
@@ -94,6 +104,30 @@ const Review = sequelize.define(
   }
 );
 
+// ===== Произвольный контент сайта (редактируется админом) =====
+const ContentBlock = sequelize.define(
+  'ContentBlock',
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true
+    },
+    key: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true
+    },
+    value: {
+      type: DataTypes.TEXT,
+      allowNull: false
+    }
+  },
+  {
+    tableName: 'content_blocks'
+  }
+);
+
 // Связи
 User.hasMany(Application, { foreignKey: 'userId' });
 Application.belongsTo(User, { foreignKey: 'userId' });
@@ -105,7 +139,8 @@ module.exports = {
   sequelize,
   User,
   Application,
-  Review
+  Review,
+  ContentBlock
 };
 
 

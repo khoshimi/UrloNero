@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Админ-панель</title>
+  <style>
+    body { font-family: Arial; margin: 20px; background: #f5f5f5; }
+    .section { margin: 20px 0; padding: 20px; border: 1px solid #ccc; background: white; border-radius: 5px; }
+    input, textarea, button, select { margin: 5px; padding: 8px; border: 1px solid #ddd; border-radius: 3px; }
+    table { width: 100%; border-collapse: collapse; background: white; }
+    th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+    th { background: #f0f0f0; }
+    button { background: #007bff; color: white; border: none; cursor: pointer; }
+    button:hover { background: #0056b3; }
+    .delete { background: #dc3545; }
+    .delete:hover { background: #c82333; }
+    .logout { float: right; margin-bottom: 10px; }
+    .status-pending { color: #856404; background: #fff3cd; padding: 3px 8px; border-radius: 3px; }
+    .status-approved { color: #155724; background: #d4edda; padding: 3px 8px; border-radius: 3px; }
+    .status-rejected { color: #721c24; background: #f8d7da; padding: 3px 8px; border-radius: 3px; }
+    textarea { width: 100%; min-height: 60px; margin: 5px 0; }
+    .content-item { margin-bottom: 15px; padding: 10px; border: 1px solid #eee; border-radius: 3px; }
+    .login-box { max-width: 300px; margin: 50px auto; }
+  </style>
+</head>
+<body>
+  <div id="login" class="section login-box">
+    <h2>Вход в админ-панель</h2>
+    <input id="emailInput" type="email" placeholder="Email (admin@gmail.com)" value="admin@gmail.com" />
+    <input id="passInput" type="password" placeholder="Пароль (admin)" value="admin" />
+    <button onclick="login()" style="width: 100%;">Войти</button>
+    <p id="loginError" style="color: red;"></p>
+  </div>
+
+  <div id="panel" style="display:none;">
+    <button class="logout" onclick="logout()">Выйти</button>
+    <h1>Админ-панель</h1>
+
+    <!-- Пользователи -->
+    <div class="section">
+      <h2>👥 Пользователи</h2>
+      <table id="usersTable">
+        <thead><tr><th>ID</th><th>Имя</th><th>Email</th><th>Телефон</th><th>Админ</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+
+    <!-- Заявки -->
+    <div class="section">
+      <h2>📋 Заявки</h2>
+      <table id="appsTable">
+        <thead><tr><th>ID</th><th>Пользователь</th><th>Email</th><th>Направление</th><th>Дата</th><th>Комментарий</th><th>Статус</th><th>Действия</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+
+    <!-- Отзывы -->
+    <div class="section">
+      <h2>💬 Отзывы</h2>
+      <table id="reviewsTable">
+        <thead><tr><th>ID</th><th>Имя</th><th>Email</th><th>Текст</th><th>Дата</th><th>Действия</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+
+    <!-- Контент (акции/новости) -->
+    <div class="section">
+      <h2>📰 Контент (акции/новости)</h2>
+      <div id="contentList"></div>
+      <div style="margin-top: 20px; padding: 10px; border-top: 1px solid #eee;">
+        <h3>Добавить новый блок:</h3>
+        <input id="newContentKey" placeholder="Ключ (например: news, promo, about)" />
+        <textarea id="newContentValue" placeholder="Текст контента" rows="3"></textarea>
+        <button onclick="addContent()">Добавить блок</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let adminEmail = null;
+
+    async function api(url, options = {}) {
+      const fetchOptions = {
+        ...options,
+        headers: {
+          'Content-Type': 'application/json',
+          'x-admin-email': adminEmail
+        }
+      };
+      
+      if (options.body) {
+        fetchOptions.body = JSON.stringify(options.body);
+      }
+      
+      const res = await fetch(url, fetchOptions);
+      return res.json();
+    }
+
+    async function login() {
+      const email = document.getElementById('emailInput').value;
+      const password = document.getElementById('passInput').value;
+      
+      try {
+        const response = await fetch('/api/admin/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password })
+        });
+        
+        const data = await response.json();
+        
+        if (!response.ok) {
+          document.getElementById('loginError').textContent = data.error || 'Ошибка входа';
+          return;
+        }
+        
+        adminEmail = data.email;
+        document.getElementById('login').style.display = 'none';
+        document.getElementById('panel').style.display = 'block';
+        loadAll();
+      } catch (error) {
+        document.getElementById('loginError').textContent = 'Ошибка соединения с сервером';
+        console.error(error);
+      }
+    }
+
+    function logout() {
+      adminEmail = null;
+      document.getElementById('login').style.display = 'block';
+      document.getElementById('panel').style.display = 'none';
+    }
+
+    async function loadAll() {
+      loadUsers();
+      loadApps();
+      loadReviews();
+      loadContent();
+    }
+
+    async function loadUsers() {
+      try {
+        const users = await api('/api/admin/users');
+        const tbody = document.querySelector('#usersTable tbody');
+        tbody.innerHTML = users.map(u => `
+          <tr>
+            <td>${u.id}</td>
+            <td>${u.name || '—'}</td>
+            <td>${u.email}</td>
+            <td>${u.phone || '—'}</td>
+            <td>${u.isAdmin ? '✅' : '❌'}</td>
+          </tr>
+        `).join('');
+      } catch (error) {
+        console.error('Ошибка загрузки пользователей:', error);
+      }
+    }
+
+    async function loadApps() {
+      try {
+        const apps = await api('/api/admin/applications');
+        const tbody = document.querySelector('#appsTable tbody');
+        tbody.innerHTML = apps.map(a => {
+          const statusClass = a.status === 'pending' ? 'status-pending' : 
+                            a.status === 'approved' ? 'status-approved' : 'status-rejected';
+          
+          return `
+          <tr>
+            <td>${a.id}</td>
+            <td>${a.User?.name || 'Гость'}</td>
+            <td>${a.User?.email || '—'}</td>
+            <td>${a.direction}</td>
+            <td>${new Date(a.date).toLocaleDateString()}</td>
+            <td>${a.comment || '—'}</td>
+            <td><span class="${statusClass}">${a.status}</span></td>
+            <td>
+              <select onchange="updateApp(${a.id}, this.value)">
+                <option value="pending" ${a.status === 'pending' ? 'selected' : ''}>В ожидании</option>
+                <option value="approved" ${a.status === 'approved' ? 'selected' : ''}>Одобрено</option>
+                <option value="rejected" ${a.status === 'rejected' ? 'selected' : ''}>Отклонено</option>
+              </select>
+            </td>
+          </tr>
+        `}).join('');
+      } catch (error) {
+        console.error('Ошибка загрузки заявок:', error);
+      }
+    }
+
+    async function updateApp(id, status) {
+      try {
+        await api(`/api/admin/applications/${id}`, { 
+          method: 'PATCH', 
+          body: { status } 
+        });
+        loadApps();
+      } catch (error) {
+        console.error('Ошибка обновления заявки:', error);
+      }
+    }
+
+    async function loadReviews() {
+      try {
+        const reviews = await api('/api/admin/reviews');
+        const tbody = document.querySelector('#reviewsTable tbody');
+        tbody.innerHTML = reviews.map(r => `
+          <tr>
+            <td>${r.id}</td>
+            <td>${r.name}</td>
+            <td>${r.User?.email || '—'}</td>
+            <td>${r.text}</td>
+            <td>${new Date(r.createdAt).toLocaleString()}</td>
+            <td><button class="delete" onclick="deleteReview(${r.id})">Удалить</button></td>
+          </tr>
+        `).join('');
+      } catch (error) {
+        console.error('Ошибка загрузки отзывов:', error);
+      }
+    }
+
+    async function deleteReview(id) {
+      if (confirm('Удалить этот отзыв?')) {
+        try {
+          await api(`/api/admin/reviews/${id}`, { method: 'DELETE' });
+          loadReviews();
+        } catch (error) {
+          console.error('Ошибка удаления отзыва:', error);
+        }
+      }
+    }
+
+    async function loadContent() {
+      try {
+        const items = await api('/api/admin/content');
+        const div = document.getElementById('contentList');
+        
+        if (items.length === 0) {
+          div.innerHTML = '<p>Нет сохраненных блоков. Добавьте новый блок ниже.</p>';
+          return;
+        }
+        
+        div.innerHTML = items.map(item => `
+          <div class="content-item">
+            <strong>${item.key}:</strong>
+            <textarea onchange="updateContent('${item.key}', this.value)" rows="3">${item.value || ''}</textarea>
+            <button class="delete" onclick="deleteContent('${item.key}')">Удалить блок</button>
+          </div>
+        `).join('');
+      } catch (error) {
+        console.error('Ошибка загрузки контента:', error);
+      }
+    }
+
+    async function updateContent(key, value) {
+      try {
+        await api('/api/admin/content', { 
+          method: 'POST', 
+          body: { key, value } 
+        });
+        loadContent();
+      } catch (error) {
+        console.error('Ошибка обновления контента:', error);
+      }
+    }
+
+    async function deleteContent(key) {
+      if (confirm(`Удалить блок "${key}"?`)) {
+        try {
+          await api(`/api/admin/content/${key}`, { method: 'DELETE' });
+          loadContent();
+        } catch (error) {
+          console.error('Ошибка удаления контента:', error);
+        }
+      }
+    }
+
+    async function addContent() {
+      const key = document.getElementById('newContentKey').value.trim();
+      const value = document.getElementById('newContentValue').value.trim();
+      
+      if (!key) {
+        alert('Введите ключ блока');
+        return;
+      }
+      
+      try {
+        await api('/api/admin/content', { 
+          method: 'POST', 
+          body: { key, value } 
+        });
+        
+        document.getElementById('newContentKey').value = '';
+        document.getElementById('newContentValue').value = '';
+        loadContent();
+      } catch (error) {
+        console.error('Ошибка добавления контента:', error);
+      }
+    }
+  </script>
+</body>
+</html>

@@ -3,7 +3,7 @@ const path = require('path');
 const fs = require('fs');
 const multer = require('multer');
 const crypto = require('crypto');
-const { sequelize, User, Application, Review } = require('./db');
+const { sequelize, User, Application, Review, ContentBlock } = require('./db');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -29,12 +29,32 @@ const avatarStorage = multer.diskStorage({
 
 const uploadAvatar = multer({ storage: avatarStorage });
 
-// простое хеширование пароля (для учебного проекта)
 function hashPassword(password) {
   return crypto
     .createHash('sha256')
     .update('urlo-nero-salt-' + String(password))
     .digest('hex');
+}
+
+// ======= Вспомогательные функции для админа =======
+async function findAdminByEmail(email) {
+  if (!email) return null;
+  return User.findOne({ where: { email, isAdmin: true } });
+}
+
+async function requireAdmin(req, res, next) {
+  try {
+    const adminEmail = req.headers['x-admin-email'];
+    const admin = await findAdminByEmail(adminEmail);
+    if (!admin) {
+      return res.status(403).json({ error: 'Нет прав администратора' });
+    }
+    req.admin = admin;
+    next();
+  } catch (e) {
+    console.error(e);
+    res.status(500).json({ error: 'Ошибка проверки прав администратора' });
+  }
 }
 
 // ======= API: пользователи =======
@@ -54,6 +74,30 @@ app.post('/api/register', async (req, res) => {
     const user = await User.create({ name, email, phone, password: passwordHash });
     const { password: _, ...safeUser } = user.toJSON();
     res.json(safeUser);
+  } catch (e) {
+    console.error(e);
+    res.status(500).json({ error: 'Ошибка сервера' });
+  }
+});
+
+// вход администратора
+app.post('/api/admin/login', async (req, res) => {
+  try {
+    const { email, password } = req.body || {};
+    
+    if (!email || !password) {
+      return res.status(400).json({ error: 'Укажите e-mail и пароль' });
+    }
+    
+    const passwordHash = hashPassword(password);
+    const admin = await User.findOne({ where: { email, password: passwordHash, isAdmin: true } });
+    
+    if (!admin) {
+      return res.status(401).json({ error: 'Неверные данные администратора' });
+    }
+    
+    const { password: _, ...safeAdmin } = admin.toJSON();
+    res.json({ ...safeAdmin, isAdmin: true });
   } catch (e) {
     console.error(e);
     res.status(500).json({ error: 'Ошибка сервера' });
@@ -123,7 +167,13 @@ app.get('/api/profile', async (req, res) => {
     });
 
     const { password: _, ...safeUser } = user.toJSON();
-    res.json({ user: safeUser, applications: apps });
+    
+    // Если это админ - добавляем флаг
+    if (user.isAdmin) {
+      res.json({ user: { ...safeUser, isAdmin: true }, applications: apps, isAdmin: true });
+    } else {
+      res.json({ user: safeUser, applications: apps });
+    }
   } catch (e) {
     console.error(e);
     res.status(500).json({ error: 'Ошибка сервера' });
@@ -150,6 +200,120 @@ app.post('/api/applications', async (req, res) => {
       comment: comment || ''
     });
     res.json(appItem);
+  } catch (e) {
+    console.error(e);
+    res.status(500).json({ error: 'Ошибка сервера' });
+  }
+});
+
+// список всех заявок для админа
+app.get('/api/admin/applications', requireAdmin, async (req, res) => {
+  try {
+    const apps = await Application.findAll({
+      include: [{ model: User, attributes: ['id', 'name', 'email', 'phone'] }],
+      order: [['createdAt', 'DESC']]
+    });
+    res.json(apps);
+  } catch (e) {
+    console.error(e);
+    res.status(500).json({ error: 'Ошибка сервера' });
+  }
+});
+
+// изменение статуса заявки
+app.patch('/api/admin/applications/:id', requireAdmin, async (req, res) => {
+  try {
+    const id = req.params.id;
+    const { status } = req.body || {};
+    if (!['pending', 'approved', 'rejected'].includes(status)) {
+      return res.status(400).json({ error: 'Некорректный статус' });
+    }
+    const appItem = await Application.findByPk(id, { include: [User] });
+    if (!appItem) {
+      return res.status(404).json({ error: 'Заявка не найдена' });
+    }
+    appItem.status = status;
+    await appItem.save();
+
+    if (status === 'approved' && appItem.User && appItem.User.email) {
+      console.log(
+        `Отправка письма пользователю ${appItem.User.email} об одобрении заявки #${appItem.id}`
+      );
+    }
+
+    res.json(appItem);
+  } catch (e) {
+    console.error(e);
+    res.status(500).json({ error: 'Ошибка сервера' });
+  }
+});
+
+// список пользователей для админа
+app.get('/api/admin/users', requireAdmin, async (req, res) => {
+  try {
+    const users = await User.findAll({
+      attributes: { exclude: ['password'] },
+      order: [['createdAt', 'DESC']]
+    });
+    res.json(users);
+  } catch (e) {
+    console.error(e);
+    res.status(500).json({ error: 'Ошибка сервера' });
+  }
+});
+
+// ======= API: контент =======
+app.get('/api/admin/content', requireAdmin, async (req, res) => {
+  try {
+    const items = await ContentBlock.findAll({ order: [['key', 'ASC']] });
+    res.json(items);
+  } catch (e) {
+    console.error(e);
+    res.status(500).json({ error: 'Ошибка сервера' });
+  }
+});
+
+app.post('/api/admin/content', requireAdmin, async (req, res) => {
+  try {
+    const { key, value } = req.body || {};
+    if (!key) {
+      return res.status(400).json({ error: 'Нет ключа контента' });
+    }
+    const [item] = await ContentBlock.findOrCreate({
+      where: { key },
+      defaults: { value: value || '' }
+    });
+    if (value !== undefined) {
+      item.value = value;
+      await item.save();
+    }
+    res.json(item);
+  } catch (e) {
+    console.error(e);
+    res.status(500).json({ error: 'Ошибка сервера' });
+  }
+});
+
+app.delete('/api/admin/content/:key', requireAdmin, async (req, res) => {
+  try {
+    const key = req.params.key;
+    await ContentBlock.destroy({ where: { key } });
+    res.json({ success: true });
+  } catch (e) {
+    console.error(e);
+    res.status(500).json({ error: 'Ошибка сервера' });
+  }
+});
+
+app.get('/api/content', async (req, res) => {
+  try {
+    const keys = (req.query.keys || '').split(',').filter(Boolean);
+    let where = {};
+    if (keys.length) {
+      where.key = keys;
+    }
+    const items = await ContentBlock.findAll({ where });
+    res.json(items);
   } catch (e) {
     console.error(e);
     res.status(500).json({ error: 'Ошибка сервера' });
@@ -215,16 +379,84 @@ app.get('/api/reviews', async (req, res) => {
   }
 });
 
+app.get('/api/admin/reviews', requireAdmin, async (req, res) => {
+  try {
+    const reviews = await Review.findAll({
+      include: [{ model: User, attributes: ['id', 'name', 'email'] }],
+      order: [['createdAt', 'DESC']]
+    });
+    res.json(reviews);
+  } catch (e) {
+    console.error(e);
+    res.status(500).json({ error: 'Ошибка сервера' });
+  }
+});
+
+app.delete('/api/admin/reviews/:id', requireAdmin, async (req, res) => {
+  try {
+    const id = req.params.id;
+    await Review.destroy({ where: { id } });
+    res.json({ success: true });
+  } catch (e) {
+    console.error(e);
+    res.status(500).json({ error: 'Ошибка сервера' });
+  }
+});
+
+app.patch('/api/admin/reviews/:id', requireAdmin, async (req, res) => {
+  try {
+    const id = req.params.id;
+    const { isVisible } = req.body || {};
+    
+    const review = await Review.findByPk(id);
+    if (!review) {
+      return res.status(404).json({ error: 'Отзыв не найден' });
+    }
+    
+    if (isVisible !== undefined) {
+      review.isVisible = isVisible;
+      await review.save();
+    }
+    
+    res.json(review);
+  } catch (e) {
+    console.error(e);
+    res.status(500).json({ error: 'Ошибка сервера' });
+  }
+});
+
 async function start() {
   try {
-    await sequelize.sync();
+    // ПРИНУДИТЕЛЬНО пересоздаем таблицы с правильной структурой
+    await sequelize.sync({ force: true });
+    
+    console.log('✅ База данных пересоздана');
+
+    // Создаем администратора
+    const admin = await User.create({
+      name: 'Администратор',
+      email: 'admin@gmail.com',
+      phone: '+7 999 999-99-99',
+      password: hashPassword('admin'),
+      isAdmin: true
+    });
+
+    console.log('===========================================');
+    console.log('✅ АДМИН СОЗДАН!');
+    console.log('===========================================');
+    console.log('📧 Email: admin@gmail.com');
+    console.log('🔑 Пароль: admin');
+    console.log('===========================================');
+    console.log('👉 Админ-панель доступна по адресу:');
+    console.log('👉 http://localhost:3000/admin.html');
+    console.log('===========================================');
+
     app.listen(PORT, () => {
-      console.log(`Server started on http://localhost:${PORT}`);
+      console.log(`🌐 Сервер запущен: http://localhost:${PORT}`);
     });
   } catch (e) {
-    console.error('Не удалось запустить сервер', e);
+    console.error('❌ Ошибка запуска сервера', e);
   }
 }
 
 start();
-
