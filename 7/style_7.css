@@ -285,11 +285,11 @@ h3{
     }
     .container {
         display: inline-block;
-        vertical-align: middle; /* Выравнивание по центру по вертикали */
+        vertical-align: middle; 
     }
     .image, .text {
         display: inline-block;
-        vertical-align: middle; /* Выравнивание по центру по вертикали */
+        vertical-align: middle;
         color: #791300; 
         font-family: 'Futurespore', sans-serif; 
         font-size: 64px;  
@@ -304,7 +304,6 @@ h3{
         transition: 0.5s;
     }
 
-    /* Формы регистрации, заявки и профиль */
     .section{
         max-width: 1200px;
         padding: 40px 20px 60px;
@@ -437,7 +436,6 @@ h3{
         font-size: 16px;
     }
 
-    /* Адаптив для мобильных устройств */
     @media (max-width: 768px){
         body{
             width: 100%;

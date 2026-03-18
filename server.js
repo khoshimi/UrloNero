@@ -168,7 +168,6 @@ app.get('/api/profile', async (req, res) => {
 
     const { password: _, ...safeUser } = user.toJSON();
     
-    // Если это админ - добавляем флаг
     if (user.isAdmin) {
       res.json({ user: { ...safeUser, isAdmin: true }, applications: apps, isAdmin: true });
     } else {
@@ -180,7 +179,6 @@ app.get('/api/profile', async (req, res) => {
   }
 });
 
-// ======= API: заявки =======
 app.post('/api/applications', async (req, res) => {
   try {
     const { email, direction, date, comment } = req.body || {};
@@ -206,7 +204,6 @@ app.post('/api/applications', async (req, res) => {
   }
 });
 
-// список всех заявок для админа
 app.get('/api/admin/applications', requireAdmin, async (req, res) => {
   try {
     const apps = await Application.findAll({
@@ -220,7 +217,6 @@ app.get('/api/admin/applications', requireAdmin, async (req, res) => {
   }
 });
 
-// изменение статуса заявки
 app.patch('/api/admin/applications/:id', requireAdmin, async (req, res) => {
   try {
     const id = req.params.id;
@@ -248,7 +244,6 @@ app.patch('/api/admin/applications/:id', requireAdmin, async (req, res) => {
   }
 });
 
-// список пользователей для админа
 app.get('/api/admin/users', requireAdmin, async (req, res) => {
   try {
     const users = await User.findAll({
@@ -262,7 +257,6 @@ app.get('/api/admin/users', requireAdmin, async (req, res) => {
   }
 });
 
-// ======= API: контент =======
 app.get('/api/admin/content', requireAdmin, async (req, res) => {
   try {
     const items = await ContentBlock.findAll({ order: [['key', 'ASC']] });
@@ -339,7 +333,6 @@ app.get('/api/applications', async (req, res) => {
   }
 });
 
-// ======= API: отзывы =======
 app.post('/api/reviews', async (req, res) => {
   try {
     const { name, text, email } = req.body || {};
@@ -427,12 +420,10 @@ app.patch('/api/admin/reviews/:id', requireAdmin, async (req, res) => {
 
 async function start() {
   try {
-    // ПРИНУДИТЕЛЬНО пересоздаем таблицы с правильной структурой
     await sequelize.sync({ force: true });
     
     console.log('✅ База данных пересоздана');
 
-    // Создаем администратора
     const admin = await User.create({
       name: 'Администратор',
       email: 'admin@gmail.com',

@@ -172,7 +172,6 @@ hr {
     text-decoration: none;
 } 
 
-/* Форма отзыва */
 .section{
     max-width: 1200px;
     padding: 40px 20px 60px;
@@ -265,7 +264,6 @@ hr {
     font-size: 14px;
 }
 
-/* Адаптив для мобильных устройств */
 @media (max-width: 768px){
     body{
         width: 100%;

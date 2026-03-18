@@ -7,7 +7,6 @@ const sequelize = new Sequelize({
   logging: false
 });
 
-// ===== Сущность User =====
 const User = sequelize.define(
   'User',
   {
@@ -39,7 +38,7 @@ const User = sequelize.define(
       defaultValue: false
     },
     avatar: {
-      type: DataTypes.TEXT, // dataURL или ссылка
+      type: DataTypes.TEXT, 
       allowNull: true
     }
   },
@@ -48,7 +47,6 @@ const User = sequelize.define(
   }
 );
 
-// ===== Сущность Application (заявка на аренду) =====
 const Application = sequelize.define(
   'Application',
   {
@@ -80,7 +78,6 @@ const Application = sequelize.define(
   }
 );
 
-// ===== Сущность Review (отзыв) =====
 const Review = sequelize.define(
   'Review',
   {
@@ -104,7 +101,6 @@ const Review = sequelize.define(
   }
 );
 
-// ===== Произвольный контент сайта (редактируется админом) =====
 const ContentBlock = sequelize.define(
   'ContentBlock',
   {
@@ -128,7 +124,6 @@ const ContentBlock = sequelize.define(
   }
 );
 
-// Связи
 User.hasMany(Application, { foreignKey: 'userId' });
 Application.belongsTo(User, { foreignKey: 'userId' });
 

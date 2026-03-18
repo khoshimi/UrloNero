@@ -328,7 +328,6 @@ hr{
   }
 }
 
-/* ========== Админ-панель ========== */
 .admin-page { min-height: 100vh; }
 .admin-main { max-width: 1100px; padding: 32px 20px 48px; }
 .admin-header { text-align: center; margin-bottom: 32px; }

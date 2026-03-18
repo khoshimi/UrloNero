@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-    <header> <!--Шапка-->
+    <header> 
         <div class="container">
             <h1>
                 <p class="text">Urlo</p><a href="practica5.html"><img  src="5_акции\logo.svg" alt="logo" class="image"></a><p class="text">Nero</p>
@@ -86,7 +86,6 @@
 </footer>
 
 <script>
-    // Бургер-меню для мобильной шапки (Акции)
     (function () {
         const header = document.querySelector('header');
         const burger = document.querySelector('.burger');
@@ -98,7 +97,6 @@
         });
     })();
 
-    // Размываем и прячем блок .cont1 при скролле (Акции), шапка зафиксирована
     (function () {
         const cont1 = document.querySelector('.cont1');
         if (!cont1) return;
@@ -122,7 +120,6 @@
         window.addEventListener('load', onScroll);
     })();
 
-    // Появление блоков с размытием (Акции)
     (function () {
         const items = document.querySelectorAll('.reveal');
         if (!items.length) return;

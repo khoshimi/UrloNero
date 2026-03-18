@@ -130,11 +130,11 @@ hr {
 }    
 .container {
     display: inline-block;
-    vertical-align: middle; /* Выравнивание по центру по вертикали */
+    vertical-align: middle; 
 }
 .image, .text {
     display: inline-block;
-    vertical-align: middle; /* Выравнивание по центру по вертикали */
+    vertical-align: middle; 
     color: #791300; 
     font-family: 'Futurespore', sans-serif; 
     font-size: 64px;  
@@ -151,7 +151,6 @@ hr {
     display: block;
 }
 
-/* Адаптив для мобильных устройств */
 @media (max-width: 768px){
     body{
         width: 100%;
